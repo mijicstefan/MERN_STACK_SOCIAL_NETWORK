@@ -1,0 +1,82 @@
+[
+    {
+        "name":"John Smith",
+        "password":"1234567878",
+        "email":"johnsmith@gmail.com",
+        "role":"user",
+        "biography":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "address":"424 Garden St.Villa Rica, GA 30180"
+    },
+    {
+        "name":"Lily Willlson",
+        "password":"12345678",
+        "email":"lilywillson@gmail.com",
+        "role":"user",
+        "biography":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "address":"8006 Greenview RoadFort Washington, MD 20744"
+    },
+    {
+        "name":"Mark Thunderbolt",
+        "password":"12345678",
+        "email":"markthunderbolt@gmail.com",
+        "role":"user",
+        "biography":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "address":"441 Primrose Ave.Ames, IA 50010"
+    },
+    {
+        "name":"Ivan Ivanovic",
+        "password":"12345678",
+        "email":"ivanivanovic@gmail.com",
+        "role":"user",
+        "biography":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "address":"422 Harvey StreetWallingford, CT 06492"
+    },
+    {
+        "name":"Roger Federer",
+        "password":"12345678",
+        "email":"rogerfederer@gmail.com",
+        "role":"user",
+        "biography":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "address":"95 Summerhouse St.North Bergen, NJ 07047"
+    },
+    {
+        "name":"Amy Winewood",
+        "password":"12345678",
+        "email":"amyww@gmail.com",
+        "role":"user",
+        "biography":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "address":"89 Pacific St.Waterloo, IA 50701"
+    },
+    {
+        "name":"Nebojsa Matic",
+        "password":"12345678",
+        "email":"nesomatic@gmail.com",
+        "role":"teacher",
+        "biography":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "address":"88 Boston St.Bethpage, NY 11714"
+    },
+    {
+        "name":"Joe Rogan",
+        "password":"12345678",
+        "email":"jorogan@gmail.com",
+        "role":"user",
+        "biography":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "address":"7010 West St.Bethlehem, PA 18015"
+    },
+    {
+        "name":"Milos Milakovic",
+        "password":"12345678",
+        "email":"milak@gmail.com",
+        "role":"user",
+        "biography":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "address":"992 Clay Rd.Lake Jackson, TX 77566"
+    },
+    {
+        "name":"Chriss Hatfield",
+        "password":"12345678",
+        "email":"crishatfield@gmail.com",
+        "role":"user",
+        "biography":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "address":"19 West Wentworth CourtLockport, NY 14094"
+    }
+]
