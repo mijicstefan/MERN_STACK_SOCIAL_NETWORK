@@ -6,84 +6,14 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const UserSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: [true, 'Please add a name.'],
-        trim: true,
-        maxlength:[50, 'Name can no be longer than 50 characters.']
+    
+    user: {
+    
     },
-    slug: String,
-    photo: {
-        type: String,
-        default: 'no-photo.jpg'
-    },
-    email: {
-        type: String,
-        required: [true, 'Please add an email.'],
-        unique: true,
-        match: [
-            /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-            'Please add a valid email.'
-        ]
-    },
-    role: {
-        type: String,
-        enum: ['user', 'teacher'],
-        default: 'user'
-    },
-    password: {
-        type: String,
-        required: [true, 'Please add a password.'],
-        minlength: 8,
-        maxlength: 16,
-        select: false
-    },
-    phone: {
-        type: String,
-        maxlength: [15, 'Phone number can not be longer than 15 characters.']
-    },
-    // address: {
-    //     type: String,
-    //     required: [true, 'Please add an address!']
-    // },
-    biography: {
-        type: String,
-        required: false,
-        maxlength: [500, "Biography can no be longer than 500 characters."]
+    teacher: {
 
     },
-    reservations:{
-        type: Array,
-        
-    },
-    location: {
-        // GeoJSON Point
-        type: {
-          type: String,
-          enum: ['Point']
-        },
-        coordinates: {
-          type: [Number],
-          index: '2dsphere'
-        },
-        formattedAddress: String,
-        street: String,
-        city: String,
-        state: String,
-        zipcode: String,
-        country: String
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
-    hourlyRate: mongoose.Schema.Types.Mixed,
-    monthlyPaycheck: mongoose.Schema.Types.Mixed,
-    monthlyHours: mongoose.Schema.Types.Mixed,
-    totalEarnings: mongoose.Schema.Types.Mixed,
-    totalHours: mongoose.Schema.Types.Mixed,
-    resetPasswordToken: String,
-    resetPasswordExpire: Date,
+    
 
 
 }, 

@@ -1,25 +1,17 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
+import Nav from './Nav';
+import LandingContent from "./LandingContent";
+
+
 
 const Landing = () => {
-    return (
-        <section className="landing">
-            <div className="dark-overlay">
-                <div className="landing-inner">
-                <h1 className="x-large">Upspot</h1>
-                <p className="lead">
-                    Join now and learn anything you want, from home.
-                </p>
-                <div className="buttons">
-                    <Link to="/register" className="btn btn-primary">Register Now</Link>
-                    <Link to="/login" className="btn btn-light">Login</Link>
-                </div>
-                </div>
-            </div>
-    </section>
-    )
-}
+  return (
+    <Fragment>
+      <Nav/>
+      <LandingContent/>
+    </Fragment>
+  );
+};
 
-export default Landing
-
-
+export default Landing;

@@ -1,110 +1,89 @@
-import React, { useState, Fragment } from 'react';
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
-import ContactSupportIcon from '@material-ui/icons/ContactSupport';
-import FaceIcon from '@material-ui/icons/Face';
-import DnsRoundedIcon from '@material-ui/icons/DnsRounded';
-import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
-import PropTypes from 'prop-types';
-import Badge from '@material-ui/core/Badge';
-import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
-
-//Serach input
-import SearchInput from '../searchInput/SearchLessons';
-//Subjects List
-import AlignementList from "../list/list";
-
-//Subject Button
-import SubjectButton from "../subjectButtons/SubjectButton";
-
-//Profile FormData
+import React from "react";
+import PropTypes from "prop-types";
+import AppBar from "@material-ui/core/AppBar";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
+import Hidden from "@material-ui/core/Hidden";
+import IconButton from "@material-ui/core/IconButton";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import MailIcon from "@material-ui/icons/Mail";
+import MenuIcon from "@material-ui/icons/Menu";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { Switch, Route, Link, BrowserRouter } from "react-router-dom";
 import DataForm from "../userProfile/DataForm";
-import UserDashboard from "../userProfile/UserDashboard";
-
-//Connect to state
 import { connect } from "react-redux";
-import GreetingMessage from '../greetingMessage/GreetingMessage';
+import NotificationsActiveRoundedIcon from "@material-ui/icons/NotificationsActiveRounded";
+import ProfileAvatar from "../userProfile/ProfileAvatar";
+import Notifications from "../userProfile/Notifications";
+import Badge from "@material-ui/core/Badge";
+import { createMuiTheme } from "@material-ui/core/styles";
+import ScheduleIcon from '@material-ui/icons/Schedule';
+import FaceRoundedIcon from '@material-ui/icons/FaceRounded';
+import FormatListNumberedRtlRoundedIcon from '@material-ui/icons/FormatListNumberedRtlRounded';
+import { loadTeachers } from "../../actions/teachers";
+import TeacherProfile from "../teachers/TeacherProfile";
+import { logout } from "../../actions/auth";
+import { useHistory } from "react-router-dom";
 
-// onClick={() => toggleSections({...section, profileView:!section['profileView']})}
+//Private Routing
+import PrivateRoute from "../routing/PrivateRoute";
 
+//Teachers Component
+import AllTeachers from "../teachers/AllTeachers";
+import { Button } from "@material-ui/core";
+import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: "#757ce8",
+      main: "#3f50b5",
+      dark: "#002884",
+      contrastText: "#fff",
+    },
+    secondary: {
+      light: "#ff7961",
+      main: "#f44336",
+      dark: "#ba000d",
+      contrastText: "#000",
+    },
+  },
+});
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: 36,
-  },
-  hide: {
-    display: 'none',
+    display: "flex",
   },
   drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-  },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: theme.spacing(7) + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
+    [theme.breakpoints.up("sm")]: {
+      width: drawerWidth,
+      flexShrink: 0,
     },
   },
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
+  appBar: {
+    marginLeft: drawerWidth,
+    [theme.breakpoints.up("sm")]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+    },
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
+  },
+  toolbar: theme.mixins.toolbar,
+  drawerPaper: {
+    width: drawerWidth,
   },
   content: {
     flexGrow: 1,
@@ -112,91 +91,97 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Sidebar = ({ userName }) => {
+function ResponsiveDrawer(props) {
+  const { container } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const history = useHistory();
 
-  //Setting view state switches
-  // const [section, toggleSections] = useState({
-  //   profileView: false,
-  //   notificationView: false,
-  //   helpView: false,
-  //   teachersView: false,
-  //   subjectsView: false,
-  //   scheduledLessonsView: false,
-  //   homeView: false
-  // });
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
 
 
-  const [section, toggleSections] = useState([
-      {
-        name: 'profileView',
-        value: false
-      },
-      {
-        name: 'notificationView',
-        value: false
-      },
-      {
-        name: 'helpView',
-        value: false
-      },
-      {
-        name: 'teachersView',
-        value: false
-      },
-      {
-        name: 'subjectsView',
-        value: false
-      },
-      {
-        name: 'scheduledLessonsView',
-        value: false
-      },
-      {
-        name: 'homeView',
-        value: false
-      }
-    ]
+  const handleLogout = e => {
+    props.logout();
+    console.log('User logged out.');
+    history.push('/login');
+  }
+
+  const drawer = (
+    <div>
+      <div className={classes.toolbar} />
+      <Divider />
+      <List>
+        {[props.userName].map((text, index) => (
+          <ListItem key={text} component={Link} to={"/myProfile"}>
+            <ListItemIcon>
+              <ProfileAvatar />
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+        {["Notifications"].map((text, index) => (
+          <ListItem key={text} component={Link} to={"/notifications"}>
+            <ListItemIcon>
+              <Badge badgeContent={10} max={999} color="error">
+                <NotificationsActiveRoundedIcon />
+              </Badge>
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+        {["Logout"].map((text, index) => (
+          <ListItem key={text} component={Button} onClick={e => handleLogout(e)}>
+            <ListItemIcon >
+                <ExitToAppRoundedIcon />
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {["Scheduled Lessons"].map((text, index) => (
+          <ListItem key={text} component={Link} to={"/myProfile"}>
+            <ListItemIcon>
+              <ScheduleIcon/>
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+        {["Teachers"].map((text, index) => (
+          <ListItem key={text} component={Link} to={"/teachers"}>
+            <ListItemIcon>
+              <FaceRoundedIcon/>
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+        {["Categories"].map((text, index) => (
+          <ListItem key={text} component={Link} to={"/categories"}>
+            <ListItemIcon>
+              <FormatListNumberedRtlRoundedIcon/>
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </div>
   );
-
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-  
-  const handleSectionViews = (e) => {
-    const name1 = [e.currentTarget.dataset.name][0];
-    console.log(`Kliknuto je dugme: ${name1}`);
-    toggleSections([...section].map(view => view.name === name1 ? {...view, value: true} : {...view, value:false}));
-    handleDrawerClose();
-  };
-
-
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
+      <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
             edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
           >
             <MenuIcon />
           </IconButton>
@@ -205,96 +190,71 @@ const Sidebar = ({ userName }) => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          }),
-        }}
-      >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-            {[userName].map((text, index) => (
-                <ListItem data-name='profileView' onClick={ handleSectionViews } button key={text}>
-                <ListItemIcon><AccountCircleIcon/></ListItemIcon>
-                <ListItemText primary={text} />
-                </ListItem>
-            ))}
-          {['Notifications'].map((text, index) => (
-            <ListItem data-name='notificationView' onClick={ handleSectionViews } button key={text}>
-              <ListItemIcon><Badge badgeContent={4} color="error"><NotificationsActiveIcon/></Badge></ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))},
-          {['Home'].map((text, index) => (
-            <ListItem data-name='homeView' button key={text}>
-              <ListItemIcon><HomeRoundedIcon/></ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-          {['Help'].map((text, index) => (
-            <ListItem data-name='helpView' button key={text}>
-              <ListItemIcon><ContactSupportIcon/></ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-          {['Logout'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon><ExitToAppIcon/></ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['Teachers'].map((text, index) => (
-            <ListItem data-name='teachersView' button key={text}>
-              <ListItemIcon><FaceIcon/></ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-          {['Subjects'].map((text, index) => (
-            <ListItem name='subjectsView' button key={text}>
-              <ListItemIcon><DnsRoundedIcon/></ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-          {['Scheduled Lessons'].map((text, index) => (
-            <ListItem name='scheduledLessonsView' button key={text}>
-              <ListItemIcon><ScheduleRoundedIcon/></ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        {section[0].value && <UserDashboard/>}
-      </main>
+      <BrowserRouter>
+        <nav className={classes.drawer} aria-label="mailbox folders">
+          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+          <Hidden smUp implementation="css">
+            <Drawer
+              container={container}
+              variant="temporary"
+              anchor={theme.direction === "rtl" ? "right" : "left"}
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              classes={{
+                paper: classes.drawerPaper,
+              }}
+              ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+              }}
+            >
+              {drawer}
+            </Drawer>
+          </Hidden>
+          <Hidden xsDown implementation="css">
+            <Drawer
+              classes={{
+                paper: classes.drawerPaper,
+              }}
+              variant="permanent"
+              open
+            >
+              {drawer}
+            </Drawer>
+          </Hidden>
+        </nav>
+
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          <Switch>
+            <Route exact path="/" render={() => <div>Home Page</div>} />
+            <PrivateRoute exact path="/MyProfile" component={DataForm} />
+            <Route path="/notifications" render={() => <Notifications />} />
+            <Route path="/teachers" render={() => <AllTeachers />} />
+            <Route path="/categories" render={() => <Notifications />} />
+            <Route path="/teacherProfile" render={() => <TeacherProfile />} />
+          </Switch>
+        </main>
+      </BrowserRouter>
     </div>
   );
 }
 
-Sidebar.propTypes = {
-    userName: PropTypes.string,
+ResponsiveDrawer.propTypes = {
+  // /**
+  //  * Injected by the documentation to work in an iframe.
+  //  * You won't need it on your project.
+  //  */
+  // container: PropTypes.instanceOf(
+  //   typeof Element === "undefined" ? Object : Element
+  // )
+
+  userName: PropTypes.string.isRequired,
+  loadTeachers: PropTypes.func.isRequired,
+  logout: PropTypes.func,
 };
 
-const mapStateToProps = state => ({
-    userName: state.auth.user.data.name
+const mapStateToProps = (state) => ({
+  userName: state.auth.user.data.name,
 });
 
-
-
-
-export default connect(mapStateToProps, {})(Sidebar);
+export default connect(mapStateToProps, { loadTeachers, logout })(ResponsiveDrawer);
