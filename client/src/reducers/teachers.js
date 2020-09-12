@@ -12,6 +12,7 @@ export default function(state = initialState, action) {
 
     switch(type) {
         case TEACHERS_LOADED:
+            console.log('Payload ', payload);
             return {...state, teachers: payload, loading: false};
         case TEACHER_PROFILE_SELECTED:
             return { ...state, teacherSelectedID: payload }    

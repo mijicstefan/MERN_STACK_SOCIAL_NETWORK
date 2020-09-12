@@ -104,7 +104,8 @@ const sendTokenResponse = (user, statusCode, res) => {
     .cookie('token', token, options)
     .json({ 
         success: true,
-        token
+        token,
+        user
     });
 };
 
@@ -179,7 +180,7 @@ exports.updateDetails = asyncHandler(async(req, res, next) => {
 exports.logout = asyncHandler(async(req, res, next) => {
    res.cookie('token', 'none', {
        expires: new Date(Date.now() + 10 * 1000),
-       httpOnly: true
+       httpOnly: false
    });
 
     res.status(200).json({ 

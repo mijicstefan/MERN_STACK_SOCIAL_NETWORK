@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import { setAlert } from "./alert";
 import {
   REGISTER_SUCCESS,
@@ -10,28 +11,18 @@ import {
   LOGOUT,
 } from "./types";
 import setAuthToken from "../utils/setAuthToken";
+import HTTPService from "../services/HTTPService";
 
 //Load User
 export const loadUser = () => async (dispatch) => {
-  //This will run only once when new user registers
-  //It needs to be run everytime when the main App.js file loads.
-  //So, we'll copy this if statement in App.js
-  if (localStorage.token) {
-    console.log(`Token je tu: ${localStorage.token}`);
-    //stick token to every future request to server.
-    setAuthToken(localStorage.token);
-    console.log("User loaded and token is ready to use.");
-  } else {
-    console.log("Token is missing!");
-    setAuthToken(localStorage.token);
-  }
-
   try {
-    const res = await axios.get("/api/v1/auth/me");
-    console.log(res);
+    const data = await HTTPService({
+      method: "get",
+      url: "/api/v1/auth/me",
+    });
     dispatch({
       type: USER_LOADED,
-      payload: res.data,
+      payload: data
     });
   } catch (err) {
     console.log("Auth problem!");
@@ -85,17 +76,32 @@ export const login = (email, password) => async (dispatch) => {
     },
   };
 
-  const body = JSON.stringify({ email, password });
-
+  // const body = JSON.stringify({ email, password });
+  const body = { email, password };
+  
   try {
-    const res = await axios.post("/api/v1/auth/login", body, config);
-    dispatch({
-      type: LOGIN_SUCCESS,
-      payload: res.data,
+    // const res = await axios.post("/api/v1/auth/login", body, config);
+    // console.log(`Response je: ${res}`);
+    // dispatch({
+    //   type: LOGIN_SUCCESS,
+    //   payload: res.data
+    // });
+
+    const data = await HTTPService({
+      method: "post",
+      url: "/api/v1/auth/login",
+      data: body
     });
 
-    dispatch(loadUser());
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: data
+    });
+
+
+
   } catch (err) {
+    console.log(err);
     // const errors = err.response.data.errors;
     const errorMsg = "Failed to Login!";
 

@@ -7,14 +7,13 @@ import Alert from './components/layout/Alert';
 import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './components/routing/PrivateRoute';
 import UserDashboard from "./components/userProfile/UserDashboard";
-
-
 import './App.css';
-
 
 //Redux
 import { Provider } from 'react-redux';
 import store from './store';
+
+//Auth actions
 import { loadUser } from "./actions/auth";
 import { loadTeachers } from "./actions/teachers";
 import setAuthToken from "./utils/setAuthToken";
@@ -27,13 +26,9 @@ if(localStorage.token) {
   setAuthToken(localStorage.token);
   console.log("User loaded and token is ready to use.");
 }
-else{
-  setAuthToken(localStorage.token);
-  console.log("Token is missing and auth header is deleted.");
-}
 
 const App = () => {
-
+  //Loading Scripts for material ui fonts and icons.
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "stylesheet";
@@ -45,16 +40,16 @@ const App = () => {
     link2.href = "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap";
     document.body.appendChild(link2);
 
+    console.log(store.getState());
+
+    // if(store.getState().auth.isAuthenticated){
+    //   store.dispatch(loadUser());
+    // }
+    
+    // store.dispatch(loadTeachers());
+
   }, []);
 
-  
-
-  useEffect(() => {
-    console.log(`Loading user!`);
-    store.dispatch(loadUser());
-    store.dispatch(loadTeachers());
-  }, []);
-  
   return (
     <Provider store = {store}>
     <Router>

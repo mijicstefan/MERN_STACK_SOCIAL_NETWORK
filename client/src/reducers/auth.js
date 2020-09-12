@@ -1,13 +1,15 @@
 import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from "../actions/types";
+import Cookies from 'js-cookie';
 const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
-    loading: true, 
+    loading: true,
     user: null
 };
 
 export default function(state = initialState, action){
     
+    console.log(action);
     const { type, payload } = action;
     switch(type) {
         case USER_LOADED:
@@ -19,12 +21,13 @@ export default function(state = initialState, action){
             }
         case REGISTER_SUCCESS:
         case LOGIN_SUCCESS: 
+            console.log('Payload ', action);
             localStorage.setItem('token', payload.token);
             return {
                 ...state,
-                ...payload,
                 isAuthenticated: true,
-                loading: false
+                loading: false,
+                user: payload.user
             }
         case REGISTER_FAIL:
         case AUTH_ERROR:
@@ -35,7 +38,8 @@ export default function(state = initialState, action){
                 ...state,
                 token: null,
                 isAuthenticated: false,
-                loading: false
+                loading: false,
+                user: null
             }    
         default:
             return state;        

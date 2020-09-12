@@ -6,6 +6,7 @@ import { loadUser } from "./auth";
 
 export const loadTeachers = () => async (dispatch) => {
   try {
+    console.log(localStorage.getItem('token'));
     const res = await axios.get("/api/v1/users/");
     dispatch({
       type: TEACHERS_LOADED,

@@ -76,7 +76,7 @@ ProfileAvatar.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    userName: state.auth.user.data.name
+    userName: state?.auth?.user?.name
 });
 
 

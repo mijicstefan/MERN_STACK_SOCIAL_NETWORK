@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignIn = ({ isAuthenticated, login }) => {
+const SignIn = ({ isAuthenticated, login, user }) => {
   const classes = useStyles();
 
   const [formData, setFormData] = useState({
@@ -69,12 +69,6 @@ const SignIn = ({ isAuthenticated, login }) => {
       login(email, password);
   };
 
-  //Redirect if logged in
-  if(isAuthenticated) {
-    //react-router-dom ima Redirect koji vodi na drugu lokaciju.
-    //When logged in, take it to the dashboard.
-    return <Redirect to='/dashboard'/>
-}
   
 
   return (
@@ -146,11 +140,11 @@ const SignIn = ({ isAuthenticated, login }) => {
 
 SignIn.propTypes = {
     login: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool,
+    isAuthenticated: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps, { login })(SignIn);

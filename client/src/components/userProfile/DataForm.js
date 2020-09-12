@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
@@ -9,6 +9,7 @@ import ProfileAvatar from "./ProfileAvatar";
 import Typography from "@material-ui/core/Typography";
 import { Box, Grid, GridList } from "@material-ui/core";
 import {updateUser} from "../../actions/crudUser";
+import {loadUser} from "../../actions/auth";
 import DropzoneArea from "../fileDropzone/Dropzone";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,8 +24,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LayoutTextFields = ({ user, userId, updateUser }) => {
+const LayoutTextFields = ({ user, userId }) => {
   const classes = useStyles();
+
+
+  // useEffect(() => {
+  //   loadUser();
+  // }, []);
 
   const [details, setDetails] = useState({
     name: "",
@@ -196,8 +202,8 @@ LayoutTextFields.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  user: state.auth.user.data,
-  userId: state.auth.user.data.id
+  user: state?.auth?.user,
+  userId: state?.auth?.user?.id
 });
 
-export default connect(mapStateToProps, { updateUser })(LayoutTextFields);
+export default connect(mapStateToProps, { updateUser, loadUser })(LayoutTextFields);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -24,12 +24,12 @@ import ProfileAvatar from "../userProfile/ProfileAvatar";
 import Notifications from "../userProfile/Notifications";
 import Badge from "@material-ui/core/Badge";
 import { createMuiTheme } from "@material-ui/core/styles";
-import ScheduleIcon from '@material-ui/icons/Schedule';
-import FaceRoundedIcon from '@material-ui/icons/FaceRounded';
-import FormatListNumberedRtlRoundedIcon from '@material-ui/icons/FormatListNumberedRtlRounded';
+import ScheduleIcon from "@material-ui/icons/Schedule";
+import FaceRoundedIcon from "@material-ui/icons/FaceRounded";
+import FormatListNumberedRtlRoundedIcon from "@material-ui/icons/FormatListNumberedRtlRounded";
 import { loadTeachers } from "../../actions/teachers";
 import TeacherProfile from "../teachers/TeacherProfile";
-import { logout } from "../../actions/auth";
+import { logout, loadUser } from "../../actions/auth";
 import { useHistory } from "react-router-dom";
 
 //Private Routing
@@ -38,7 +38,7 @@ import PrivateRoute from "../routing/PrivateRoute";
 //Teachers Component
 import AllTeachers from "../teachers/AllTeachers";
 import { Button } from "@material-ui/core";
-import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
+import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
 
 const theme = createMuiTheme({
   palette: {
@@ -102,19 +102,18 @@ function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
 
-
-  const handleLogout = e => {
+  const handleLogout = (e) => {
     props.logout();
-    console.log('User logged out.');
-    history.push('/login');
-  }
+    console.log("User logged out.");
+    history.push("/login");
+  };
 
   const drawer = (
     <div>
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {[props.userName].map((text, index) => (
+        {[props?.user?.name].map((text, index) => (
           <ListItem key={text} component={Link} to={"/myProfile"}>
             <ListItemIcon>
               <ProfileAvatar />
@@ -133,9 +132,13 @@ function ResponsiveDrawer(props) {
           </ListItem>
         ))}
         {["Logout"].map((text, index) => (
-          <ListItem key={text} component={Button} onClick={e => handleLogout(e)}>
-            <ListItemIcon >
-                <ExitToAppRoundedIcon />
+          <ListItem
+            key={text}
+            component={Button}
+            onClick={(e) => handleLogout(e)}
+          >
+            <ListItemIcon>
+              <ExitToAppRoundedIcon />
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
@@ -146,7 +149,7 @@ function ResponsiveDrawer(props) {
         {["Scheduled Lessons"].map((text, index) => (
           <ListItem key={text} component={Link} to={"/myProfile"}>
             <ListItemIcon>
-              <ScheduleIcon/>
+              <ScheduleIcon />
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
@@ -154,7 +157,7 @@ function ResponsiveDrawer(props) {
         {["Teachers"].map((text, index) => (
           <ListItem key={text} component={Link} to={"/teachers"}>
             <ListItemIcon>
-              <FaceRoundedIcon/>
+              <FaceRoundedIcon />
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
@@ -162,7 +165,7 @@ function ResponsiveDrawer(props) {
         {["Categories"].map((text, index) => (
           <ListItem key={text} component={Link} to={"/categories"}>
             <ListItemIcon>
-              <FormatListNumberedRtlRoundedIcon/>
+              <FormatListNumberedRtlRoundedIcon />
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
@@ -170,6 +173,8 @@ function ResponsiveDrawer(props) {
       </List>
     </div>
   );
+
+  console.log(props.user);
 
   return (
     <div className={classes.root}>
@@ -226,12 +231,19 @@ function ResponsiveDrawer(props) {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Switch>
-            <Route exact path="/" render={() => <div>Home Page</div>} />
             <PrivateRoute exact path="/MyProfile" component={DataForm} />
-            <Route path="/notifications" render={() => <Notifications />} />
-            <Route path="/teachers" render={() => <AllTeachers />} />
-            <Route path="/categories" render={() => <Notifications />} />
-            <Route path="/teacherProfile" render={() => <TeacherProfile />} />
+            <PrivateRoute
+              exact
+              path="/notifications"
+              component={Notifications}
+            />
+            <PrivateRoute exact path="/teachers" component={AllTeachers} />
+            <PrivateRoute exact path="/categories" component={Notifications} />
+            <PrivateRoute
+              eaxct
+              path="/teacherProfile"
+              component={TeacherProfile}
+            />
           </Switch>
         </main>
       </BrowserRouter>
@@ -253,8 +265,11 @@ ResponsiveDrawer.propTypes = {
   logout: PropTypes.func,
 };
 
+//Upitinik je da provjeri da li je null....
 const mapStateToProps = (state) => ({
-  userName: state.auth.user.data.name,
+  user: state?.auth?.user,
 });
 
-export default connect(mapStateToProps, { loadTeachers, logout })(ResponsiveDrawer);
+export default connect(mapStateToProps, { loadTeachers, logout })(
+  ResponsiveDrawer
+);
