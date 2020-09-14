@@ -8,16 +8,13 @@ export const loadTeachers = () => async (dispatch) => {
   try {
     console.log(localStorage.getItem('token'));
     const res = await axios.get("/api/v1/users/");
+    
     dispatch({
       type: TEACHERS_LOADED,
       payload: res.data,
     });
   } catch (err) {
     const errorMsg = "Failed to load teachers.";
-
-    if (err) {
-      dispatch(setAlert(errorMsg, "danger"));
-    }
   }
 };
 

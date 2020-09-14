@@ -69,6 +69,11 @@ const SignIn = ({ isAuthenticated, login, user }) => {
       login(email, password);
   };
 
+
+  if(isAuthenticated){
+    return <Redirect to='/dashboard'/>;
+  }
+
   
 
   return (

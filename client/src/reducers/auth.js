@@ -13,11 +13,12 @@ export default function(state = initialState, action){
     const { type, payload } = action;
     switch(type) {
         case USER_LOADED:
+            console.log(`USER LOADED JE DISPATCHOVAO PAYLOAD:`, payload);
             return{
                 ...state,
                 isAuthenticated: true,
                 loading: false,
-                user: payload
+                user: payload.data
             }
         case REGISTER_SUCCESS:
         case LOGIN_SUCCESS: 

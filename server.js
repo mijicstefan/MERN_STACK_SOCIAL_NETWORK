@@ -25,6 +25,7 @@ connectDB();
 const users = require("./routes/users");
 const auth = require("./routes/auth");
 const admin = require("./routes/admin");
+const blogs = require("./routes/blogs");
 
 //Express server
 const app = express();
@@ -73,6 +74,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use("/api/v1/users", users);
 app.use('/api/v1/admin', admin);
 app.use('/api/v1/auth', auth);
+app.use('/api/v1/blogs', blogs);
+
 
 
 

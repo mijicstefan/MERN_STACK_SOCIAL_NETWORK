@@ -3,6 +3,7 @@ import { PROFILE_UPDATE_SUCCESS } from "./types";
 import axios from "axios";
 import {setAlert} from "./alert";
 import {loadUser} from "./auth";
+import HTTPService from "../services/HTTPService";
 
 export const updateUser = (name, email, address, biography, id) => async (dispatch) => {
   const config = {
@@ -15,10 +16,14 @@ export const updateUser = (name, email, address, biography, id) => async (dispat
 
 
   try {
-    const res = await axios.put("/api/v1/users/"+id, body, config);
+    const data = await HTTPService({
+      method: "put",
+      url: "/api/v1/users/"+id,
+      data: body
+    });
     dispatch({
       type: PROFILE_UPDATE_SUCCESS,
-      payload: res.data,
+      payload: data
     });
 
     dispatch(loadUser());

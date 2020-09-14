@@ -10,7 +10,7 @@ export default function(state = initialState, action) {
 
     switch(type) {
         case PROFILE_UPDATE_SUCCESS:
-            return {...state, updatedUser: payload};
+            return {...state, updatedUser: payload.data};
         default:
             return state;    
     }

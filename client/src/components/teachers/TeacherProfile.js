@@ -15,42 +15,30 @@ function TeacherProfile({ teacherID, teachers }) {
         (t) =>
           t._id === teacherID && (
             <Fragment>
-              <Grid container spacing={6}>
+              <Grid container>
                 <Grid container spacing={3}>
-                  <Grid item xs={3}>
+                  <Grid item xs={4}>
                     <img src={image} />
                   </Grid>
-                  <Grid item xs={3}>
-                    <Grid container>
+                  <Grid item xs={4}>
+                    <Grid container spacing={3}>
                       <Grid item>
-                        <Typography variant="h6">{t.name}</Typography>
-                        <VerifiedUserRoundedIcon /> Verified Teacher
-                      </Grid>
-                      <Grid item>
-                        <Rating />
+                        <Typography variant="h4">{t.name}</Typography>
+                        <VerifiedUserRoundedIcon /> <span style={{color:'green'}}>Verified Blogger</span>
                       </Grid>
                     </Grid>
+                    <Grid container>
+                      <Grid item><b><i>{`"${t.biography}"`}</i></b></Grid>
+                    </Grid>
+                    <Grid container>
+                      <Rating />
+                    </Grid>
                   </Grid>
-                  <Grid item>
-                    {t.hourlyRate} <EuroSymbolRoundedIcon /> / h
-                  </Grid>
-                </Grid>
-                <Grid item xs={4}>
-                  <Chip />
-                </Grid>
-                <Grid item xs={4}>
-                  <Chip color="primary" label="algebra" />
-                </Grid>
-                <Grid item xs={4}>
-                  <Chip color="primary" label="algebra" />
-                </Grid>
-                <Grid item xs={4}>
-                  <Chip color="primary" label="algebra" />
                 </Grid>
               </Grid>
               <Grid container>
-                <Grid item>
-                  <FreeTerms teacher={t} />
+                <Grid item xs={5}>
+                  <Typography variant='h2'>Recent feed</Typography>
                 </Grid>
               </Grid>
             </Fragment>
@@ -66,8 +54,8 @@ TeacherProfile.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  teacherID: state.teachers.teacherSelectedID,
-  teachers: state.teachers.teachers.data,
+  teacherID: state?.teachers?.teacherSelectedID,
+  teachers: state?.teachers?.teachers?.data,
 });
 
 export default connect(mapStateToProps, {})(TeacherProfile);

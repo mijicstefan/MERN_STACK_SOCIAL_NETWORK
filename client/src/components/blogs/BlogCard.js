@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -10,8 +10,9 @@ import Typography from "@material-ui/core/Typography";
 import image from "../../img/showcase.jpg";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import { teacherProfileSelected } from "../../actions/teachers";
+import { blogSelected } from "../../actions/blog";
 import { Link } from "react-router-dom";
+import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
 
 
 const useStyles = makeStyles({
@@ -23,42 +24,35 @@ const useStyles = makeStyles({
   },
 });
 
-const MediaCard = ({ teacherProfileSelected, teacher }) => {
+const MediaCard = ({ blogSelected, blog }) => {
   const classes = useStyles();
 
+
   const handleClick = (e) => {
-    console.log(`id kliknutog blogera je: ${[e.currentTarget.name]}`);
-    teacherProfileSelected([e.currentTarget.name]);
+    console.log(`id kliknutog bloga je: ${[e.currentTarget.name]}`);
+    blogSelected([e.currentTarget.name]);
   };
 
-  let biography = teacher.biography;
 
-  if(teacher.biography.length > 114){
-    biography = teacher.biography.substring(0,114);
+  if(blog.blogger.name){
+    console.log('Ime blogera je: ', blog.blogger.name);
   }
-  else{
-    let biographyLen = teacher.biography.length;
-    let charsToAdd = 114 - biographyLen;
+  
 
-    while(charsToAdd >= 0){
-      biography += " ";
-      charsToAdd--;
-    }
-  }
   return (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
           image={image}
-          title={teacher.name}
+          title={blog.blogName}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {teacher.name}
+            {blog.blogName}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-          {biography}
+          <CreateRoundedIcon/> Author: {blog.blogger.name}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -66,13 +60,13 @@ const MediaCard = ({ teacherProfileSelected, teacher }) => {
         <Button
           onClick={(e) => handleClick(e)}
           size="small"
+          variant='contained'
           color="primary"
           component={Link}
-          to={"/teacherProfile"}
-          name={teacher._id}
-          variant='contained'
+          to={"/readBlog"}
+          name={blog._id}
         >
-          See Profile
+          Read
         </Button>
       </CardActions>
     </Card>
@@ -80,7 +74,8 @@ const MediaCard = ({ teacherProfileSelected, teacher }) => {
 }
 
 MediaCard.propTypes = {
-
+    blog: PropTypes.object.isRequired,
+    blogSelected: PropTypes.func.isRequired
 };
 
 
@@ -91,4 +86,4 @@ const mapStateToProps = state => ({
 
 
 
-export default connect(mapStateToProps, { teacherProfileSelected })(MediaCard);
+export default connect(mapStateToProps, { blogSelected })(MediaCard);
