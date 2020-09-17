@@ -35,12 +35,13 @@ export const loadUser = () => async (dispatch) => {
 //Register User
 export const register = ({ name, email, password }) => async (dispatch) => {
 
-  const body = JSON.stringify({ name, email, password });
+  const body = { name, email, password };
 
   try {
     const data = await HTTPService({
       method: "post",
       url: "/api/v1/auth/register",
+      data: body
     });
     dispatch({
       type: REGISTER_SUCCESS,
@@ -51,10 +52,10 @@ export const register = ({ name, email, password }) => async (dispatch) => {
   } catch (err) {
     const errorMsg = "Failed to Register!";
     if (err) {
-      dispatch(setAlert(errorMsg, "danger"));
+      dispatch(setAlert(errorMsg, "error"));
     }
     dispatch({
-      type: REGISTER_FAIL,
+      type: REGISTER_FAIL,  
     });
   }
 };
@@ -96,14 +97,14 @@ export const login = (email, password) => async (dispatch) => {
   } catch (err) {
     console.log(err);
     // const errors = err.response.data.errors;
-    const errorMsg = "Failed to Login!";
+    const errorMsg = "Failed to Login! Wrong credentials.";
 
     // if(errors) {
     //     errors.forEach(error => dispatach(setAlert(error.msg, 'danger')));
     // }
 
     if (err) {
-      dispatch(setAlert(errorMsg, "danger"));
+      dispatch(setAlert(errorMsg, "error"));
     }
 
     dispatch({

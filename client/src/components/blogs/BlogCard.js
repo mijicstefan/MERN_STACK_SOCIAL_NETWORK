@@ -49,7 +49,7 @@ const MediaCard = ({ blogSelected, blog }) => {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {blog.blogName}
+            {blog.blogName.substring(0,16) + "..."}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
           <CreateRoundedIcon/> Author: {blog.blogger.name}

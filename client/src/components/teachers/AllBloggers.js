@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import TeacherCard from "./TeacherCard";
 import { loadTeachers } from "../../actions/teachers";
+import { loadBlogs } from "../../actions/blog";
 import { connect } from "react-redux";
 import { Grid, TextField } from "@material-ui/core";
 
@@ -13,20 +14,13 @@ const AllBloggers = ({
 }) => {
   useEffect(() => {
     loadTeachers();
+    loadBlogs();
+
   }, []);
 
   console.log("all teacheeers");
   return (
     <div>
-      <Grid container justify="center" spacing={3}>
-        <Grid item xs={12}>
-          <TextField
-            id="outlined-basic"
-            label="Search By Name"
-            variant="outlined"
-          />
-        </Grid>
-      </Grid>
       <Grid container spacing={2}>
         {teachers &&
           teachers.map((teacher) => (
@@ -58,4 +52,4 @@ const mapStateToProps = (state) => ({
   loading: state?.teachers?.loading,
 });
 
-export default connect(mapStateToProps, { loadTeachers })(AllBloggers);
+export default connect(mapStateToProps, { loadTeachers, loadBlogs })(AllBloggers);

@@ -17,6 +17,7 @@ import { Redirect } from 'react-router-dom';
 import { login } from "../../actions/auth";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import AlertMessage from "../../components/layout/Alert";
 
 function Copyright() {
   return (
@@ -78,13 +79,14 @@ const SignIn = ({ isAuthenticated, login, user }) => {
 
   return (
     <Container component="main" maxWidth="xs">
+      <AlertMessage/>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign in to Upspot
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
@@ -128,7 +130,7 @@ const SignIn = ({ isAuthenticated, login, user }) => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/register" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

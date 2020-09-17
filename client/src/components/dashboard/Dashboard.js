@@ -18,6 +18,10 @@ import UserProfile from "../userProfile/UserProfile";
 import FeedPage from "../userProfile/FeedPage";
 import CreateBlog from "../blogs/CreateBlog";
 import ReadBlog from "../blogs/ReadBlog";
+import { loadBlogs } from "../../actions/blog";
+import { loadComments } from "../../actions/comments";
+import { loadTeachers } from "../../actions/teachers";
+
 import {
   BrowserRouter as Router,
   Route,
@@ -43,9 +47,16 @@ import {
 //   },
 // }));
 
-const Dashboard = ({ getCurrentProfile, auth, profile, loadUser }) => {
+const Dashboard = ({ getCurrentProfile, auth, profile, loadUser, loadTeachers }) => {
   //   const classes = useStyles();
 
+  useEffect(()=>{
+    loadBlogs();
+    loadComments();
+    loadTeachers();
+
+
+  }, []);
   return (
     <BrowserRouter>
       <Fragment>
@@ -73,7 +84,7 @@ const Dashboard = ({ getCurrentProfile, auth, profile, loadUser }) => {
                   path="/categories"
                   component={Notifications}
                 />
-                <Grid item xs={12}>
+                <Grid item justify='space-around' xs={12}>
                   <PrivateRoute
                     eaxct
                     path="/teacherProfile"
@@ -101,6 +112,6 @@ const mapStateToProps = (state) => ({
   profile: state?.profile,
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, loadUser })(
+export default connect(mapStateToProps, { getCurrentProfile, loadUser, loadBlogs, loadTeachers })(
   Dashboard
 );

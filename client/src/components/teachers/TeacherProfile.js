@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Paper, Grid, Typography, Chip } from "@material-ui/core";
 import image from "../../img/math.jpg";
@@ -7,16 +7,25 @@ import EuroSymbolRoundedIcon from "@material-ui/icons/EuroSymbolRounded";
 import { connect } from "react-redux";
 import FreeTerms from "./FreeTermsTable";
 import Rating from "./Rating";
+import BlogRecentFeed from "../blogs/BlogRecentFeed";
+import { loadBlogs } from "../../actions/blog";
+import { loadComments } from "../../actions/comments";
 
-function TeacherProfile({ teacherID, teachers }) {
+function TeacherProfile({ teacherID, teachers, blogs, loadBlogs, loadComments }) {
+
+  useEffect(()=>{
+    loadBlogs();
+    loadComments();
+  }, []);
+
   return (
     <div>
       {teachers.map(
         (t) =>
           t._id === teacherID && (
             <Fragment>
-              <Grid container>
-                <Grid container spacing={3}>
+              <Grid container justify='center'>
+                <Grid container spacing={6}>
                   <Grid item xs={4}>
                     <img src={image} />
                   </Grid>
@@ -28,7 +37,7 @@ function TeacherProfile({ teacherID, teachers }) {
                       </Grid>
                     </Grid>
                     <Grid container>
-                      <Grid item><b><i>{`"${t.biography}"`}</i></b></Grid>
+                      <Grid item><b><i>{`"${t.biography.substring(0,150)}..."`}</i></b></Grid>
                     </Grid>
                     <Grid container>
                       <Rating />
@@ -36,10 +45,15 @@ function TeacherProfile({ teacherID, teachers }) {
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid container>
+              <Grid container justify='flex-start' spacing={4}>
                 <Grid item xs={5}>
-                  <Typography variant='h2'>Recent feed</Typography>
+                  <Typography variant='h4'><i>Recent feed</i></Typography>
                 </Grid>
+              </Grid>
+              <Grid container spacing={6}>
+                {blogs ? blogs.map(b => (
+                  b.blogger._id === teacherID && <Grid item xs={12}><BlogRecentFeed blog={b}  blogName={b.blogName}/></Grid>
+                )): (<Grid item> <p>No recent activities.</p> </Grid>)}
               </Grid>
             </Fragment>
           )
@@ -56,6 +70,7 @@ TeacherProfile.propTypes = {
 const mapStateToProps = (state) => ({
   teacherID: state?.teachers?.teacherSelectedID,
   teachers: state?.teachers?.teachers?.data,
+  blogs: state?.blog?.allBlogs[0]
 });
 
-export default connect(mapStateToProps, {})(TeacherProfile);
+export default connect(mapStateToProps, { loadBlogs, loadComments })(TeacherProfile);

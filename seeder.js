@@ -9,6 +9,7 @@ dotenv.config({ path: './config/config.env' });
 // Load models
 const User = require('./models/User');
 const Blog = require('./models/Blog');
+const Comment = require('./models/Comment');
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI, {
@@ -27,11 +28,19 @@ const blogs = JSON.parse(
   fs.readFileSync(`${__dirname}/_data/blogs.json`, 'utf-8')
 );
 
+const comments = JSON.parse(
+  fs.readFileSync(`${__dirname}/_data/comments.json`, 'utf-8')
+);
+
+
+
 // Import into DB
 const importData = async () => {
   try {
     await User.create(users);
     console.log('Users imported'.green.inverse);
+    await Comment.create(comments);
+    console.log('Comments imported'.green.inverse);
 
     // await Blog.create(blogs);
     // console.log('Blogs imported'.green.inverse);

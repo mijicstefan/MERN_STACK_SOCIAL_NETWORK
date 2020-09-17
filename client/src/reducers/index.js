@@ -6,6 +6,7 @@ import crudUser from "./crudUser";
 import teachers from "./teachers";
 import blog from "./blog";
 import notification from "./notification";
+import comments from "./comments";
 
 export default combineReducers({
   alert,
@@ -14,5 +15,6 @@ export default combineReducers({
   crudUser,
   teachers,
   blog,
-  notification
+  notification,
+  comments
 });

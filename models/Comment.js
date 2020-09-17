@@ -1,50 +1,37 @@
-const crypto = require('crypto');
+const crypto = require("crypto");
 const mongoose = require("mongoose");
 const slugify = require("slugify");
 const geocoder = require("../utils/geocoder");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const BlogSchema = new mongoose.Schema({
-    blogName: {
-        type: String,
-        required:[true, 'Please add a blog name.'],
-        unique: true
-    },
-    category: {
-        type: String,
-        enum: ['fashion', 'food','travel', 'music', 'lifestyle', 'fitness', 'DIY', 'sport', 'politics', 'fun'],
-        required: [true, 'Please add a blog category.']
+const CommentSchema = new mongoose.Schema(
+  {
+    blogID: {
+      type: mongoose.Schema.ObjectId,
+    //   required: [true, "Please add a blog id."],
     },
     createdAt: {
-        type: Date,
-        default: Date.now
+      type: Date,
+      default: Date.now,
     },
     content: {
-        type: String,
-        maxlength: [50000, 'Maximum blog length is 50000 charcters.'],
-        minlength: [500, 'Minimum blog length is 500 characters.'],
-        required: [true, 'Please add a blog content.']
+      type: String,
+      maxlength: [200, "Maximum blog length is 200 charcters."],
+      minlength: [1, "Minimum blog length is 1 character."],
+      required: [true, "Please write a comment. It can not be empty."],
     },
     blogger: {
-        type: Object,
-        ref: 'User',
+      type: Object,
+      ref: "User",
     },
-    slug: {
-        type: String
-    }
-}, 
-{
-    toJSON: {virtuals: true},
-    toObject: {virtuals: true}
-}
+  },
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
 );
 
-//Create user slug from the name
-BlogSchema.pre('save', function(next){
-    this.slug = slugify(this.blogName, { lower: true });
-    next();
-});
 
 // //Create user slug from the name
 // UserSchema.pre('save', function(next){
@@ -59,7 +46,6 @@ BlogSchema.pre('save', function(next){
 //     }
 //     next();
 // });
-
 
 //Geocode and create location field
 // UserSchema.pre('save', async function(next){
@@ -79,7 +65,6 @@ BlogSchema.pre('save', function(next){
 //     this.address = undefined;
 //     next();
 // });
-
 
 //Encrypt passwwrod using bcrypt
 // UserSchema.pre('save', async function(next) {
@@ -126,8 +111,4 @@ BlogSchema.pre('save', function(next){
 
 // }
 
-
-
-module.exports = mongoose.model("Blog", BlogSchema);
-
-
+module.exports = mongoose.model("Comment", CommentSchema);

@@ -9,6 +9,9 @@ import PrivateRoute from "./components/routing/PrivateRoute";
 import UserDashboard from "./components/userProfile/UserDashboard";
 import "./App.css";
 
+//Policies
+import PrivacyPolicy from "./components/policies/PrivacyPolicy";
+import TermsOfUse from "./components/policies/TermsOfUse";
 //Redux
 import { Provider } from "react-redux";
 import store from "./store";
@@ -59,6 +62,8 @@ const App = () => {
               <section className="container">
                 <Switch>
                   <Route exact path="/register" component={Register} />
+                  <Route exact path="/privacy-policy" component={PrivacyPolicy} />
+                  <Route exact path="/terms-of-use" component={TermsOfUse} />
                   <Route exact path="/login" component={Login} />
                   <PrivateRoute exact path="/dashboard" component={Dashboard} />
                   <PrivateRoute
