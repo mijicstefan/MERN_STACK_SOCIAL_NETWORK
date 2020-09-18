@@ -23,7 +23,8 @@ const AllBloggers = ({
     <div>
       <Grid container spacing={2}>
         {teachers &&
-          teachers.map((teacher) => (
+          teachers.map((teacher) =>  (
+            
             <Grid item xs={3}>
               <TeacherCard
                 key={teacher.email}

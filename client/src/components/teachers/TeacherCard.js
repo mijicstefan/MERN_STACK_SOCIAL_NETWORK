@@ -32,6 +32,7 @@ const MediaCard = ({ teacherProfileSelected, teacher }) => {
   };
 
   let biography = teacher.biography;
+  console.log('biografije iz TeacherCard-a: ', biography);
 
   if(teacher.biography.length > 114){
     biography = teacher.biography.substring(0,114);
@@ -42,7 +43,7 @@ const MediaCard = ({ teacherProfileSelected, teacher }) => {
 
     while(charsToAdd >= 0){
       biography += " ";
-      charsToAdd--;
+      charsToAdd -= 1;
     }
   }
   return (

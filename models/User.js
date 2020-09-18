@@ -48,7 +48,7 @@ const UserSchema = new mongoose.Schema({
     // },
     biography: {
         type: String,
-        required: false,
+        required: true,
         maxlength: [500, "Biography can no be longer than 500 characters."]
 
     },

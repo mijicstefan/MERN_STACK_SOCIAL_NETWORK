@@ -33,9 +33,9 @@ export const loadUser = () => async (dispatch) => {
 };
 
 //Register User
-export const register = ({ name, email, password }) => async (dispatch) => {
+export const register = (name, email, biography, password ) => async (dispatch) => {
 
-  const body = { name, email, password };
+  const body = { name, email, biography, password };
 
   try {
     const data = await HTTPService({

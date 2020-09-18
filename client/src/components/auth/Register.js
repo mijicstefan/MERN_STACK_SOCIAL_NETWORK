@@ -59,18 +59,19 @@ const SignUp = ({ register, isAuthenticated }) => {
     lastName: "",
     email: "",
     password: "",
+    biography: "",
   });
-
-  const { firstName, lastName, email, password } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  const { firstName, lastName, email, password, biography } = formData;
+ 
   const onSubmit = async (e) => {
     console.log("New registering user info: ", formData);
     e.preventDefault();
     const name = firstName + " " + lastName;
-    register({ name, email, password });
+    register(name, email, biography, password );
   };
 
   //Redirect to dashboard if user has been registered.
@@ -127,6 +128,18 @@ const SignUp = ({ register, isAuthenticated }) => {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={(e) => onChange(e)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Short biography"
+                  name="biography"
+                  autoComplete="biography"
                   onChange={(e) => onChange(e)}
                 />
               </Grid>
