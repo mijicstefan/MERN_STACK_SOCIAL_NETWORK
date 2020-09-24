@@ -55,7 +55,7 @@ code .
 ```BASH
 npm i
 ```
-## U konzoli je jeophodno pokrenuti skriptu za konkurento pokretanje frontenda i backenda:
+## U konzoli je je neophodno pokrenuti skriptu za konkurento pokretanje frontenda i backenda:
 ```BASH
 npm run dev
 ```
