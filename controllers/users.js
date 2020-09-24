@@ -6,9 +6,6 @@ const multerS3 = require('multer-s3');
 const upload = require('../utils/file-upload');
 const ErrorResponse = require('../utils/errorResponse');
 
-
-
-
 // @desc      Get Users (Teachers)
 // @route     GET /api/v1/users
 // @access    Private, only roles: student/admin can get all teachers.
@@ -112,19 +109,6 @@ exports.deleteUser = asyncHandler(async (req, res, next) => {
       new ErrorResponse(`User ${req.user.id} is not authorized to delete this resource.`, 401)
     );
   }
-});
-
-
-
-// @desc      Upload Photo
-// @route     POST /api/v1/users/photo
-// @access    Private/Admin
-exports.uploadPhoto = asyncHandler(async (req, res, next) => {
-  console.log(`Otvorena ruta za sliku`);
-  const singelUpload = upload.single('image');
-  singelUpload(req,res, function(err){
-    return res.json(`imageUrl: "check aws dashboard"`);
-  });
 });
 
 

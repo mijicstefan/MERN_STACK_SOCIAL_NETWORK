@@ -43,7 +43,8 @@ if(process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-//?Security
+
+//Security
 //Sanitize data in mongo
 app.use(mongoSanitize());
 //Se security headers
@@ -65,8 +66,6 @@ app.use(limiter);
 //Prevent http param polution
 app.use(hpp());
 
-
-
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));  
 
@@ -77,9 +76,6 @@ app.use('/api/v1/admin', admin);
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/blogs', blogs);
 app.use('/api/v1/comments', comments);
-
-
-
 
 //Error handler middleware
 app.use(errorHandler);

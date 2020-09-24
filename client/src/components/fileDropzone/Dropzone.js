@@ -35,7 +35,7 @@ export default class DropzoneDialogExample extends Component {
         return (
             <div>
                 <Button variant='contained' color='primary' onClick={this.handleOpen.bind(this)}>
-                  Upload Image
+                  Image
                 </Button>
                 <DropzoneDialog
                     open={this.state.open}

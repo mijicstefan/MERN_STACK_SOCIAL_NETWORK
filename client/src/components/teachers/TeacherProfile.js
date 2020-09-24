@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Paper, Grid, Typography, Chip } from "@material-ui/core";
-import image from "../../img/math.jpg";
+import image from "../../img/user-avatar.png";
 import VerifiedUserRoundedIcon from "@material-ui/icons/VerifiedUserRounded";
 import EuroSymbolRoundedIcon from "@material-ui/icons/EuroSymbolRounded";
 import { connect } from "react-redux";
@@ -47,13 +47,13 @@ function TeacherProfile({ teacherID, teachers, blogs, loadBlogs, loadComments })
               </Grid>
               <Grid container justify='flex-start' spacing={4}>
                 <Grid item xs={5}>
-                  <Typography variant='h4'><i>Recent feed</i></Typography>
+                  <Typography variant='h5'><i>Recent feed</i></Typography>
                 </Grid>
               </Grid>
               <Grid container spacing={6}>
                 {blogs ? blogs.map(b => (
                   b.blogger._id === teacherID && <Grid item xs={12}><BlogRecentFeed blog={b}  blogName={b.blogName}/></Grid>
-                )): (<Grid item> <p>No recent activities.</p> </Grid>)}
+                )): (<Grid item> <p></p> </Grid>)}
               </Grid>
             </Fragment>
           )

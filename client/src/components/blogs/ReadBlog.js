@@ -15,6 +15,7 @@ import image from "../../img/math.jpg";
 import VerifiedUserRoundedIcon from "@material-ui/icons/VerifiedUserRounded";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { loadComments, addComment} from "../../actions/comments";
+import userAvatarIMG from "../../img/user-avatar.png";
 
 
 
@@ -119,7 +120,7 @@ function ReadBlog({ blogID, blogs, user, loadComments, allComments, addComment }
                               <Grid item xs={1}>
                                 <Avatar
                                   alt="Remy Sharp"
-                                  src="https://source.unsplash.com/random"
+                                  src={userAvatarIMG}
                                 />
                               </Grid>
                               <Grid item xs={4}>

@@ -13,7 +13,7 @@ exports.protect = asyncHandler(async(req, res, next) => {
 //         token = req.cookies.token;
 //    }
 
-   //Make sure token exists, dal iz ukikija da l iz authorizacije iz hedera.
+   //Make sure token exists, da li iz kukija da li iz authorizacije iz hedera.
    if(!token) {
        return next(new ErrorResponse('Not authorized to access this route.', 401));
 

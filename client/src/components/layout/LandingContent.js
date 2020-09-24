@@ -11,8 +11,7 @@ function LandingContent(props) {
         <div class="landing-inner">
           <h1 class="x-large">UpSpot</h1>
           <p class="lead">
-            You wanna learn from the comfort of your home? We've got you
-            covered. Sign up now and let's get started!
+            Share what you have to share. 
           </p>
           <div class="buttons">
             <Grid container spacing={4}>

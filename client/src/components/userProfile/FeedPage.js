@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Grid, Typography } from '@material-ui/core'
 import img from "../../img/undraw_welcoming_xvuq.svg";
 
+
 function FeedPage(props) {
     return (
         <div>

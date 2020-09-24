@@ -18,6 +18,7 @@ import { login } from "../../actions/auth";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import AlertMessage from "../../components/layout/Alert";
+import PrivacyPolicy from "../../components/policies/PrivacyPolicy";
 
 function Copyright() {
   return (
@@ -124,11 +125,6 @@ const SignIn = ({ isAuthenticated, login, user }) => {
             Sign In
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
             <Grid item>
               <Link href="/register" variant="body2">
                 {"Don't have an account? Sign Up"}

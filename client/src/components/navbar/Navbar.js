@@ -165,7 +165,7 @@ const Navbar = ({ user, logout, loadUser, state, history, newBlog }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Mini variant drawer
+            UpSpot
           </Typography>
         </Toolbar>
       </AppBar>
@@ -246,14 +246,6 @@ const Navbar = ({ user, logout, loadUser, state, history, newBlog }) => {
             <ListItem button key={text} component={Link} to="/blogs">
               <ListItemIcon>
                 <BookRoundedIcon />
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-          {["Scheduled lessons"].map((text, index) => (
-            <ListItem button key={text} component={Link} to="/teachers">
-              <ListItemIcon>
-                <ScheduleRoundedIcon />
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>

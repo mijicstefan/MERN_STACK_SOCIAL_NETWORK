@@ -12,6 +12,7 @@ import { updateUser } from "../../actions/crudUser";
 import { loadUser } from "../../actions/auth";
 import DropzoneArea from "../fileDropzone/Dropzone";
 import img from "../../img/undraw_profile_6l1l.svg";
+import AleertMessage from "../../components/layout/Alert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,9 +37,6 @@ const LayoutTextFields = ({ user, updateUser }) => {
     name: "",
     email: "",
     biography: "",
-    city: "",
-    country: "",
-    street: "",
   });
 
   const onChange = (e) =>
@@ -46,21 +44,14 @@ const LayoutTextFields = ({ user, updateUser }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const { city, country, street, biography, email, name } = details;
-    const formatedAddress = city + "," + street + "," + country;
-    console.log(`Formatirana Adresa je: ${formatedAddress}`);
-    console.log(email, name);
+    const { biography, email, name } = details;
     let id = user._id;
-    let idIvana = "5f52de4400193b49a4be0795";
-    console.log(
-      `Id trenutnog usera je sada: ${id}, a Ivana Ivanovica je: ${idIvana}`
-    );
-    console.log(`Da li su id-evi isti: ${idIvana === id ? true : false}`);
-    updateUser(name, email, formatedAddress, biography, id);
+    updateUser(name, email, biography, id);
   };
 
   return (
     <Fragment>
+    <AleertMessage/>
       <div className={classes.root}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
@@ -71,7 +62,7 @@ const LayoutTextFields = ({ user, updateUser }) => {
         </Grid>
       </div>
       <div className={classes.root}>
-        <Grid container justify="space-between" spacing={5}>
+        <Grid container justify="space-between" spacing={7}>
           <Grid item xs={5}>
             <Grid container spacing={3}>
               <TextField
@@ -109,7 +100,7 @@ const LayoutTextFields = ({ user, updateUser }) => {
                 id="outlined-full-width"
                 label="Short Biography"
                 style={{ margin: 8 }}
-                fullWidth
+                fullWidth={true}
                 margin="normal"
                 InputLabelProps={{
                   shrink: true,
@@ -118,51 +109,19 @@ const LayoutTextFields = ({ user, updateUser }) => {
                 onChange={(e) => onChange(e)}
               />
             </Grid>
-            <Grid container justify="space-between" spacing={3}>
-              <Grid item xs={3}>
-                <TextField
-                  name="city"
-                  id="outlined-full-width"
-                  label="City"
-                  style={{ margin: 8 }}
-                  fullWidth
-                  margin="normal"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  variant="standard"
-                  onChange={(e) => onChange(e)}
-                />
-              </Grid>
-              <Grid item xs={3}>
-                <TextField
-                  name="country"
-                  id="outlined-full-width"
-                  label="Country"
-                  style={{ margin: 8 }}
-                  fullWidth
-                  margin="normal"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  variant="standard"
-                  onChange={(e) => onChange(e)}
-                />
-              </Grid>
-              <Grid item xs={3}>
-                <TextField
-                  name="street"
-                  id="outlined-full-width"
-                  label="Street"
-                  style={{ margin: 8 }}
-                  fullWidth
-                  margin="normal"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  variant="standard"
-                  onChange={(e) => onChange(e)}
-                />
+            <Grid container justify='space-evenly'>
+              <Grid item xs={4}>
+                <Button
+                  style={{ margin: 15 }}
+                  align="center"
+                  color="primary"
+                  variant="contained"
+                  component="label"
+                  onClick={(e) => onSubmit(e)}
+                >
+                  Save
+                  <input type="button" style={{ display: "none" }} />
+                </Button>
               </Grid>
             </Grid>
           </Grid>
@@ -170,23 +129,6 @@ const LayoutTextFields = ({ user, updateUser }) => {
             <img src={img} />
           </Grid>
         </Grid>
-        <Grid container spacing={1}>
-        <Grid item xs={2}>
-          <Button
-            align="center"
-            color="primary"
-            variant="contained"
-            component="label"
-            onClick={(e) => onSubmit(e)}
-          >
-            Save
-            <input type="button" style={{ display: "none" }} />
-          </Button>
-        </Grid>
-        <Grid item xs={2}>
-          <DropzoneArea color="secondary" />
-        </Grid>
-      </Grid>
       </div>
     </Fragment>
   );

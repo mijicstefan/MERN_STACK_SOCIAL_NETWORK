@@ -5,14 +5,14 @@ import {setAlert} from "./alert";
 import {loadUser} from "./auth";
 import HTTPService from "../services/HTTPService";
 
-export const updateUser = (name, email, address, biography, id) => async (dispatch) => {
+export const updateUser = (name, email, biography, id) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
 
-  const body = JSON.stringify({ name, email, address, biography });
+  const body = JSON.stringify({ name, email, biography });
 
 
   try {
@@ -30,10 +30,10 @@ export const updateUser = (name, email, address, biography, id) => async (dispat
     dispatch(setAlert('Success', "success"));
 
   } catch (err) {
-    const errorMsg = "Failed to update user";
+    const errorMsg = "Failed to update user. You must provide all data.";
 
     if (err) {
-      dispatch(setAlert(errorMsg, "danger"));
+      dispatch(setAlert(errorMsg, "error"));
     }
   }
 };

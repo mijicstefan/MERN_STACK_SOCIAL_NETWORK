@@ -78,11 +78,6 @@ const MediaCard = ({
       <CardActions>
         <Grid container spacing={1}>
           <Grid item>
-            <Button size="small" color="primary">
-              Share
-            </Button>
-          </Grid>
-          <Grid item>
             <Button
               component={Link}
               to={"/readBlog"}

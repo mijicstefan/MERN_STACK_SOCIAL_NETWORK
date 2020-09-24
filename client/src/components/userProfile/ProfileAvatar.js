@@ -4,6 +4,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
+import userAvatarIMG from "../../img/user-avatar.png";
 
  
 const StyledBadge = withStyles((theme) => ({
@@ -65,7 +66,7 @@ const ProfileAvatar = ({ userName }) => {
         }}
         variant="dot"
       >
-        <Avatar alt={userName} src="/static/images/avatar/1.jpg" />
+        <Avatar alt={userName} src={userAvatarIMG} />
       </StyledBadge>
     </div>
   );

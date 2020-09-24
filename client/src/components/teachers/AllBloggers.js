@@ -13,9 +13,8 @@ const AllBloggers = ({
   loading,
 }) => {
   useEffect(() => {
-    loadTeachers();
     loadBlogs();
-
+    loadTeachers();
   }, []);
 
   console.log("all teacheeers");

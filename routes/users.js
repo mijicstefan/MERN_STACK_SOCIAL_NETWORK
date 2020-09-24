@@ -19,8 +19,6 @@ router
     .post(protect, authorize('admin'), createUser)
     .get(protect, authorize('admin', 'user', 'teacher'), getUsers);
 
-router
-    .route('/upload/photo').post(protect, authorize('admin', 'user', 'teacher'), uploadPhoto);
 
 router
     .route('/admin').get(protect, authorize('admin'), getUsersAdmin);    

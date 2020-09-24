@@ -31,7 +31,7 @@ const AlignItemsList = ({ newBlogNotif, blogAuthor, notifList }) => {
   return (
     <div>
       {newBlogNotif ? (
-        <Grid container>
+        <Grid container justify='center'>
           <Grid item xs={12}>
             <List className={classes.root}>
               <ListItem alignItems="flex-start">

@@ -7,7 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import image from "../../img/showcase.jpg";
+import image from '../../img/blog.svg';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { blogSelected } from "../../actions/blog";
