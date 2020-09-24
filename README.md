@@ -55,6 +55,7 @@ code .
 ```BASH
 npm i
 ```
+### Isti postupak uraditi i u /client folderu.
 ## U konzoli je je neophodno pokrenuti skriptu za konkurento pokretanje frontenda i backenda:
 ```BASH
 npm run dev
